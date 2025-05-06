@@ -1,0 +1,3 @@
+/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/build/CMakeFiles/Introduction.dir
