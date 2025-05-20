@@ -31,4 +31,7 @@ void main()
 
     // Send correct position based on which bird we're rendering
     if (gl_VertexID % 2 == 0)
-        gl_Position = vec4
+        gl_Position = vec4(birdPosition, 0.0, 1.0); // First bird (front)
+    else
+        gl_Position = vec4(bird2Position, 0.0, 1.0); // Second bird (behind)
+}

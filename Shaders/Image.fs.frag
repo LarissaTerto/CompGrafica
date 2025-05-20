@@ -1,22 +1,26 @@
-#version 330 core
+uniform sampler2D iChannel0;
+uniform sampler2D iChannel1;
+uniform sampler2D iChannel2;
+uniform sampler2D iChannel3;
+uniform float iTime;
+uniform vec4 iMouse;
+uniform vec2 iResolution;
+uniform int iFrame;
+
+#define PI 3.1459
+
 out vec4 FragColor;
 in vec2 fragCoord;
 
-uniform vec2 iResolution;
-
 void main()
 {
-    // Normalize coordinates (0 to 1 range)
-    vec2 uv = fragCoord / iResolution;
-
-    // Sky gradient (light blue at top, deeper blue towards bottom)
-    vec3 skyColor = mix(vec3(0.6, 0.9, 1.0), vec3(0.2, 0.6, 1.0), uv.y);
-
-    // Grass at the bottom
-    vec3 grassColor = vec3(0.1, 0.6, 0.2);
-    if (uv.y < 0.2) // Grass takes up the bottom 20% of the screen
-        skyColor = grassColor;
-
-    // Output color
-    FragColor = vec4(skyColor, 1.0);
+    // Debug colors to identify objects
+    if (fragCoord.y > 0.8) // Simulate bird height
+        FragColor = vec4(1.0, 0.0, 0.0, 1.0); // Red (birds)
+    else if (fragCoord.x > 0.3 && fragCoord.x < 0.7) // Simulate banner in center
+        FragColor = vec4(0.0, 0.0, 1.0, 1.0); // Blue (banner)
+    else
+        FragColor = vec4(0.1, 0.6, 0.2, 1.0); // Green (grass)
 }
+
+
