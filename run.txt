@@ -3,6 +3,27 @@ cmake ..
 make
 ./Introduction
 
-Mudar:
-CMakeLists.txt
-image.fs.frag (ray tracing)
+Código: Shaders -> .frag e .vert
+
+
+image.fs.frag (base cod professor)
+uniform sampler2D iChannel0;
+uniform sampler2D iChannel1;
+uniform sampler2D iChannel2;
+uniform sampler2D iChannel3;
+uniform float iTime;
+uniform vec4 iMouse;
+uniform vec2 iResolution;
+uniform int iFrame;
+out vec4 C;
+
+#define PI 3.1459
+
+/*  Install  Istructions
+
+sudo apt-get install g++ cmake git
+ sudo apt-get install libsoil-dev libglm-dev libassimp-dev libglew-dev libglfw3-dev libxinerama-dev libxcursor-dev
+libxi-dev libfreetype-dev libgl1-mesa-dev xorg-dev
+
+git clone https://github.com/JoeyDeVries/LearnOpenGL.git*/
+
