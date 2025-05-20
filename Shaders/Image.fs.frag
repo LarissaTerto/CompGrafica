@@ -1,78 +1,22 @@
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-uniform float iTime;
-uniform vec4 iMouse;
+#version 330 core
+out vec4 FragColor;
+in vec2 fragCoord;
+
 uniform vec2 iResolution;
-uniform int iFrame;
-out vec4 C;
-
-#define PI 3.1459
-
-/*  Install  Istructions
-
-sudo apt-get install g++ cmake git
- sudo apt-get install libsoil-dev libglm-dev libassimp-dev libglew-dev libglfw3-dev libxinerama-dev libxcursor-dev
-libxi-dev libfreetype-dev libgl1-mesa-dev xorg-dev
-
-git clone https://github.com/JoeyDeVries/LearnOpenGL.git*/
-
-mat3 edge = mat3(-1.,-1.,-1.,
-                                     -1.,8.,-1.,
-                                     -1.,-1.,-1.);
-
-mat3 gauss = mat3(1.,1.,1.,
-                                     1.,1.,1.,
-                                     1.,1.,1.);
-
-mat3 laplacian = mat3(0.,-1.,0.,
-                                     -1.,4.,-1.,
-                                     0.,-1.,0.);
-
-mat3 sobelH = mat3(1.,0.,-1.,
-                                     2.,0.,-2.,
-                                     1.,0.,-1.);
-
-mat3 sobelV = mat3(1.,2.,1.,
-                                     0.,0.,0.,
-                                     -1.,-2.,-1.);
-
-
-
-float Filter33(vec2 pos,mat3 kernel)
-{
-         float r=0.0;
-                 for(int i=-1;i<2;i++)
-                    for (int j =-1;j<2;j++)
-                    {
-                        vec3 c =texture(iChannel0,(pos+vec2(i,j))/iResolution.xy).xyz;
-                        float tmp = dot(c,vec3(0.177,0.812,0.0106));
-                        r+=tmp*kernel[i+1][j+1];
-                    }
-         return r/9.;
-}
-
-
-vec3 Filter33c(vec2 pos,mat3 kernel)
-{
-         vec3 r=vec3(0.0);
-                 for(int i=-1;i<2;i++)
-                    for (int j =-1;j<2;j++)
-                    {
-                        vec3 c =texture(iChannel0,(pos+vec2(i,j))/iResolution.xy).xyz;
-
-                        r+=c*kernel[i+1][j+1];
-                    }
-         return r/9.;
-}
-
 
 void main()
 {
-    C=vec4(1.0);
-    vec2 uv = gl_FragCoord.xy;
-    //vec3 grey= Filter33c(uv,laplacian)*9.0;
-    vec3 color = texture(iChannel0,uv/iResolution.xy).xyz;
-    C.xyz=color;
+    // Normalize coordinates (0 to 1 range)
+    vec2 uv = fragCoord / iResolution;
+
+    // Sky gradient (light blue at top, deeper blue towards bottom)
+    vec3 skyColor = mix(vec3(0.6, 0.9, 1.0), vec3(0.2, 0.6, 1.0), uv.y);
+
+    // Grass at the bottom
+    vec3 grassColor = vec3(0.1, 0.6, 0.2);
+    if (uv.y < 0.2) // Grass takes up the bottom 20% of the screen
+        skyColor = grassColor;
+
+    // Output color
+    FragColor = vec4(skyColor, 1.0);
 }

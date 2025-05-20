@@ -3,190 +3,27 @@ cmake ..
 make
 ./Introduction
 
-Codar no arquivo
-image.fs.frag 
-
-Código 1: 
-float dist(vec2 p, float r)
-{
-    float d= length(p)-r;
-    return smoothstep(r,r+0.001,d);
-}
+Código: Shaders -> .frag e .vert
 
 
-void main ()
-{
-    vec2 p = gl_FragCoord.xy/iResolution.xy;
-     vec3 col =mix(vec3(0.9,0.3,0.1),vec3(0.7,0.5,0.3),p.y);
-     float ra =iResolution.x/iResolution.y;
-     p.x*=ra;
-     float r =0.06;
-     vec2 q = p -vec2(0.5,0.7);
-     r+=0.027*cos(atan(q.x,q.y)*15-20*q.x+ 2*sin(iTime*1.2));
-     r+=0.01*sin(atan(q.x,q.y)*90.0);
-      col*=dist(q,r);
+image.fs.frag (base cod professor)
+uniform sampler2D iChannel0;
+uniform sampler2D iChannel1;
+uniform sampler2D iChannel2;
+uniform sampler2D iChannel3;
+uniform float iTime;
+uniform vec4 iMouse;
+uniform vec2 iResolution;
+uniform int iFrame;
+out vec4 C;
 
-      r=0.02;
-      r+= 0.005*cos(q.y*130);
+#define PI 3.1459
 
-      r+=exp(-40*p.y);
-     col*=1.0-(1.0-smoothstep(r,r+0.001,abs(q.x-0.3*sin(q.y*2.2))))*(1.0-smoothstep(0.0,0.1,q.y));
+/*  Install  Istructions
 
-    vec2 s = vec2(1.0, 0.4);
-    vec2 t = p - s;
-    col = mix(
-        vec3(1.0, 0.8, 0.0),
-        col,
-        dist(t, 0.1+sin(atan(t.x, t.y)*180.0)*0.005)
-    );
+sudo apt-get install g++ cmake git
+ sudo apt-get install libsoil-dev libglm-dev libassimp-dev libglew-dev libglfw3-dev libxinerama-dev libxcursor-dev
+libxi-dev libfreetype-dev libgl1-mesa-dev xorg-dev
 
-C = vec4(col,1.0);
-
-}
-
-Código 2 (ray tracing):
-
-float minDist = 0.01;
-float maxDist = 100.;
-int maxIt = 100;
-
-float sphereDist(vec3 p)
-{
-    vec4 s =vec4(0.0,1.0,5.0,1.0);
-    return length(s.xyz-p)-s.w;
-}
-
-float planeDist(vec3 p)
-{
-    vec4 plane = vec4(0.0,1.0,0.0,0.0);
-    return dot(p,plane.xyz)-plane.w;
-}
-
-float getSceneDist(vec3 p)
-{
-    float sd = sphereDist(p);
-    float pd = planeDist(p);
-    return min(sd,pd);
-}
-
-float rayMarching(vec3 ro,vec3 rd)
-{
-    int i=0;
-    float da=0.0;
-    vec3 p = ro+da*rd;
-    float d_o =getSceneDist(p);
-    while ((da<maxDist)&&(d_o>minDist)&&(i<maxIt))
-    {
-        da+=d_o;
-        p =ro+da*rd;
-        d_o =getSceneDist(p);
-        i++;
-    }
-    if((i<maxIt)&&(da<maxDist))
-        return da;
-    else
-        return maxDist;
-}
-
-vec3 estimateNormal(vec3 p)
-{
-    float ep = 0.01;
-    float d = getSceneDist(p);
-    vec3 n =vec3 (d-getSceneDist(vec3(p.x-ep,p.y,p.z)),d-getSceneDist(vec3(p.x,p.y-ep,p.z)),d-getSceneDist(vec3(p.x,p.y,p.z-ep)));
-    return normalize(n);
-}
-
-
-float getLight(vec3 p)
-{
-    vec3 lp = vec3 (0.0,6.0,5.0);
-    lp.xz+=vec2(sin(iTime),cos(iTime))*3.0;
-    vec3 ld = normalize(lp-p);
-    vec3 n = estimateNormal(p);
-    float r =clamp(dot(ld,n),0.0,1.0);
-    float s =rayMarching(p+1.0*minDist*n,ld);
-    if(s<length(p-lp))
-        r*=0.2;
-    return r;
-
-}
-
-
-
-void main ()
-{
-    vec2 uv = (gl_FragCoord.xy-0.5*iResolution.xy)/iResolution.xy;
-    float ra =iResolution.x/iResolution.y;
-    uv.x*=ra;
-
-    vec3 ro = vec3(0.0,1.0,0.0);
-    vec3 rd =vec3(uv.x,uv.y,1.0);
-     float d = rayMarching(ro,rd);
-    vec3 p = ro+d*rd;
-    float l = getLight(p);
-   vec3 col = vec3(l);
-C = vec4(col,1.0);
-
-}
-
-Cód 3: Curvas + ray tracing
-
-mat3 edge = mat3(-1.,-1.,-1.,
-                                     -1.,8.,-1.,
-                                     -1.,-1.,-1.);
-
-mat3 gauss = mat3(1.,1.,1.,
-                                     1.,1.,1.,
-                                     1.,1.,1.);
-
-mat3 laplacian = mat3(0.,-1.,0.,
-                                     -1.,4.,-1.,
-                                     0.,-1.,0.);
-
-mat3 sobelH = mat3(1.,0.,-1.,
-                                     2.,0.,-2.,
-                                     1.,0.,-1.);
-
-mat3 sobelV = mat3(1.,2.,1.,
-                                     0.,0.,0.,
-                                     -1.,-2.,-1.);
-
-
-
-float Filter33(vec2 pos,mat3 kernel)
-{
-         float r=0.0;
-                 for(int i=-1;i<2;i++)
-                    for (int j =-1;j<2;j++)
-                    {
-                        vec3 c =texture(iChannel0,(pos+vec2(i,j))/iResolution.xy).xyz;
-                        float tmp = dot(c,vec3(0.177,0.812,0.0106));
-                        r+=tmp*kernel[i+1][j+1];
-                    }
-         return r/9.;
-}
-
-
-vec3 Filter33c(vec2 pos,mat3 kernel)
-{
-         vec3 r=vec3(0.0);
-                 for(int i=-1;i<2;i++)
-                    for (int j =-1;j<2;j++)
-                    {
-                        vec3 c =texture(iChannel0,(pos+vec2(i,j))/iResolution.xy).xyz;
-
-                        r+=c*kernel[i+1][j+1];
-                    }
-         return r/9.;
-}
-
-
-void main()
-{
-    C=vec4(1.0);
-    vec2 uv = gl_FragCoord.xy;
-    //vec3 grey= Filter33c(uv,laplacian)*9.0;
-    vec3 color = texture(iChannel0,uv/iResolution.xy).xyz;
-    C.xyz=color;
-}
+git clone https://github.com/JoeyDeVries/LearnOpenGL.git*/
 
