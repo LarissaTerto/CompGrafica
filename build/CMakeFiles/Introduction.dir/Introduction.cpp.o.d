@@ -356,7 +356,7 @@ CMakeFiles/Introduction.dir/Introduction.cpp.o: \
  /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/includes/glm/detail/../simd/integer.h \
  /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/includes/GLFW/glfw3.h \
  /usr/include/GL/gl.h /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/Shader.h \
- /home/helton/SPH/LearnOpenGL/includes/glad/glad.h \
+ /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/LearnOpenGL/includes/glad/glad.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/c++/13/bits/char_traits.h \

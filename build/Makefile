@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Introduction
+# Target rules for targets named Math3
 
 # Build rule for target.
-Introduction: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Introduction
-.PHONY : Introduction
+Math3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Math3
+.PHONY : Math3
 
 # fast build rule for target.
-Introduction/fast:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/build
-.PHONY : Introduction/fast
+Math3/fast:
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/build
+.PHONY : Math3/fast
 
-Introduction.o: Introduction.cpp.o
+Math3.o: Math3.cpp.o
 
-.PHONY : Introduction.o
+.PHONY : Math3.o
 
 # target to build an object file
-Introduction.cpp.o:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/Introduction.cpp.o
-.PHONY : Introduction.cpp.o
+Math3.cpp.o:
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/Math3.cpp.o
+.PHONY : Math3.cpp.o
 
-Introduction.i: Introduction.cpp.i
+Math3.i: Math3.cpp.i
 
-.PHONY : Introduction.i
+.PHONY : Math3.i
 
 # target to preprocess a source file
-Introduction.cpp.i:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/Introduction.cpp.i
-.PHONY : Introduction.cpp.i
+Math3.cpp.i:
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/Math3.cpp.i
+.PHONY : Math3.cpp.i
 
-Introduction.s: Introduction.cpp.s
+Math3.s: Math3.cpp.s
 
-.PHONY : Introduction.s
+.PHONY : Math3.s
 
 # target to generate assembly for a file
-Introduction.cpp.s:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/Introduction.cpp.s
-.PHONY : Introduction.cpp.s
+Math3.cpp.s:
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/Math3.cpp.s
+.PHONY : Math3.cpp.s
 
 glad.o: glad.c.o
 
@@ -156,7 +156,7 @@ glad.o: glad.c.o
 
 # target to build an object file
 glad.c.o:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/glad.c.o
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/glad.c.o
 .PHONY : glad.c.o
 
 glad.i: glad.c.i
@@ -165,7 +165,7 @@ glad.i: glad.c.i
 
 # target to preprocess a source file
 glad.c.i:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/glad.c.i
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/glad.c.i
 .PHONY : glad.c.i
 
 glad.s: glad.c.s
@@ -174,7 +174,7 @@ glad.s: glad.c.s
 
 # target to generate assembly for a file
 glad.c.s:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/glad.c.s
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/glad.c.s
 .PHONY : glad.c.s
 
 stb_image/stb_image.o: stb_image/stb_image.cpp.o
@@ -183,7 +183,7 @@ stb_image/stb_image.o: stb_image/stb_image.cpp.o
 
 # target to build an object file
 stb_image/stb_image.cpp.o:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/stb_image/stb_image.cpp.o
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/stb_image/stb_image.cpp.o
 .PHONY : stb_image/stb_image.cpp.o
 
 stb_image/stb_image.i: stb_image/stb_image.cpp.i
@@ -192,7 +192,7 @@ stb_image/stb_image.i: stb_image/stb_image.cpp.i
 
 # target to preprocess a source file
 stb_image/stb_image.cpp.i:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/stb_image/stb_image.cpp.i
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/stb_image/stb_image.cpp.i
 .PHONY : stb_image/stb_image.cpp.i
 
 stb_image/stb_image.s: stb_image/stb_image.cpp.s
@@ -201,7 +201,7 @@ stb_image/stb_image.s: stb_image/stb_image.cpp.s
 
 # target to generate assembly for a file
 stb_image/stb_image.cpp.s:
-	$(MAKE) -f CMakeFiles/Introduction.dir/build.make CMakeFiles/Introduction.dir/stb_image/stb_image.cpp.s
+	$(MAKE) -f CMakeFiles/Math3.dir/build.make CMakeFiles/Math3.dir/stb_image/stb_image.cpp.s
 .PHONY : stb_image/stb_image.cpp.s
 
 # Help Target
@@ -212,10 +212,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Introduction"
-	@echo "... Introduction.o"
-	@echo "... Introduction.i"
-	@echo "... Introduction.s"
+	@echo "... Math3"
+	@echo "... Math3.o"
+	@echo "... Math3.i"
+	@echo "... Math3.s"
 	@echo "... glad.o"
 	@echo "... glad.i"
 	@echo "... glad.s"

@@ -151,7 +151,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Introduction
+CMAKE_PROJECT_NAME:STATIC=Math3
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -226,6 +226,12 @@ Introduction_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 Introduction_SOURCE_DIR:STATIC=/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord
+
+//Value Computed by CMake
+Math3_BINARY_DIR:STATIC=/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/build
+
+//Value Computed by CMake
+Math3_SOURCE_DIR:STATIC=/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord
 
 
 ########################
