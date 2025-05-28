@@ -1,4 +1,4 @@
-
+#version 330 core
 
 //uniform vec2 iResolution;
 uniform sampler2D iChannel0;

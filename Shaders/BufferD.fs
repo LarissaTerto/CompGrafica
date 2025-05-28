@@ -1,3 +1,4 @@
+#version 330 core
 out vec4 C;
 uniform sampler2D iChannel0;
 uniform sampler2D iChannel1;

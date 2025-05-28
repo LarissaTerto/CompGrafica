@@ -1,3 +1,4 @@
+#version 330 core
 uniform sampler2D iChannel0;
 uniform sampler2D iChannel1;
 uniform sampler2D iChannel2;
