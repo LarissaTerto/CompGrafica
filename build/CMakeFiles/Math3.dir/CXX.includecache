@@ -27,8 +27,8 @@ inttypes.h
 -
 
 /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/Math3.cpp
+LearnOpenGL/includes/glad/glad.h
 /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/LearnOpenGL/includes/glad/glad.h
--
 glm/glm.hpp
 -
 GLFW/glfw3.h
@@ -46,11 +46,11 @@ string
 unistd.h
 -
 filesystem
--
+/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/filesystem
 
 /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/Shader.h
+LearnOpenGL/includes/glad/glad.h
 /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/LearnOpenGL/includes/glad/glad.h
--
 glm/glm.hpp
 -
 string
@@ -61,10 +61,6 @@ sstream
 -
 iostream
 -
-
-/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/stb_image/stb_image.cpp
-stb_image.h
-/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/stb_image/stb_image.h
 
 /mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/stb_image/stb_image.h
 stb_image.h

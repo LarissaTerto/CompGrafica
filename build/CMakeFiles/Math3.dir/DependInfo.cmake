@@ -11,6 +11,7 @@ set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
+  "../HelloWord/HelloWord"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
   "/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/Math3.cpp" "/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/build/CMakeFiles/Math3.dir/Math3.cpp.o"
@@ -20,6 +21,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../HelloWord/HelloWord"
   )
 
 # Targets to which this target links.

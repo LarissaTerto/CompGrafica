@@ -1,7 +1,7 @@
 cd build
 cmake ..
 make
-./Introduction
+./Math3
 
 Código: Shaders -> .frag e .vert
 

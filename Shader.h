@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include </mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/LearnOpenGL/includes/glad/glad.h>
+#include "LearnOpenGL/includes/glad/glad.h"
 #include <glm/glm.hpp>
 #include <string>
 #include <fstream>

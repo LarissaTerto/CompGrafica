@@ -1,4 +1,4 @@
-#include </mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/LearnOpenGL/includes/glad/glad.h>
+#include "LearnOpenGL/includes/glad/glad.h"
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include "Shader.h"
@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
-#include <filesystem>
+#include "filesystem"
 
 double lastTime,lt,fps;
 int nbFrames = 0;
@@ -122,12 +122,12 @@ int main()
 
 
 
-     const std::string cString = parentPath+ "/Shaders/common.incl";
+    const std::string cString = parentPath+ "/Shaders/common.incl";
     const char * commonPath = cString.c_str();
-    Shader Imageprogram(commonPath,vertexShaderPath,fragmentShaderPath);
-    Shader BufferAprogram(commonPath,vertexShaderPath,fragmentShaderAPath);
-  //  Shader BufferBprogram(commonPath,vertexShaderPath,fragmentShaderBPath);
-   // Shader BufferCprogram(commonPath,vertexShaderPath,fragmentShaderCPath);
+    Shader Imageprogram("",vertexShaderPath,fragmentShaderPath);
+    Shader BufferAprogram("",vertexShaderPath,fragmentShaderAPath);
+    //Shader BufferBprogram(commonPath,vertexShaderPath,fragmentShaderBPath);
+    //Shader BufferCprogram(commonPath,vertexShaderPath,fragmentShaderCPath);
     //Shader BufferDprogram(commonPath,vertexShaderPath,fragmentShaderDPath);
     const char * commonPath1 = cString.c_str();
     Shader TVShaderprogram(commonPath1,TVvertexShaderPath,TVShaderPath);

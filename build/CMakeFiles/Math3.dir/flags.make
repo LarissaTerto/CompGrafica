@@ -7,11 +7,11 @@ C_FLAGS =
 
 C_DEFINES = 
 
-C_INCLUDES = 
+C_INCLUDES = -I/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/HelloWord/HelloWord 
 
 CXX_FLAGS =   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/HelloWord/HelloWord 
 

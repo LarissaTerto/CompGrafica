@@ -6,37 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/LearnOpenGL/includes/glad/glad.h
-windows.h
--
-stddef.h
--
-KHR/khrplatform.h
--
-inttypes.h
--
-inttypes.h
--
-inttypes.h
--
-stdint.h
--
-stdint.h
--
-inttypes.h
--
-
-/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/glad.c
-stdio.h
--
-stdlib.h
--
-string.h
--
-/mnt/c/Users/ltert/Downloads/USP/semestres/USP_7sem/HelloWord/HelloWord/LearnOpenGL/includes/glad/glad.h
--
-windows.h
--
-dlfcn.h
--
-
