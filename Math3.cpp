@@ -17,8 +17,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window,double *mouse, bool * shouldDraw, bool * press);
 void DisplayFramebufferTexture(unsigned int textureID, Shader *program,unsigned int VAO,glm::vec2 R);
 unsigned int loadTexture(const char *path);
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1024;
+const unsigned int SCR_HEIGHT = 678;
 
 float vertices[] = {
     1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
@@ -210,7 +210,7 @@ int main()
 
     //Para utilizar o framebuffer, é necessário ligar a ele uma textura
     unsigned int iChannel_0;
-     unsigned int imageTexture0 = loadTexture("../textures/ShaderToyTextures/Lichen.jpg");
+     unsigned int imageTexture0 = loadTexture("../textures/ShaderToyTextures/each.png");
     glGenTextures(1, &iChannel_0);
     glBindTexture(GL_TEXTURE_2D, iChannel_0);
      
@@ -226,7 +226,7 @@ int main()
     glGenerateMipmap(GL_TEXTURE_2D);
 
     glBindTexture(GL_TEXTURE_2D, 0);
-
+    stbi_set_flip_vertically_on_load(true);  // Flip image on load (if using stb_image)
     //LIGANDO A TEXTURA AO FRAMBUFFER
 
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, iChannel_0, 0 );
@@ -620,7 +620,7 @@ void DisplayFramebufferTexture(unsigned int textureID,Shader *program, unsigned 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
-    printf("%i:%i\n", width,height);
+    //printf("%i:%i\n", width,height);
 }
 
 // utility function for loading a 2D texture from file
