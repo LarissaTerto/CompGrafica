@@ -252,7 +252,7 @@ int main()
 
 
     unsigned int iChannel_1;
-
+     unsigned int birdTexture = loadTexture("../textures/ShaderToyTextures/bird.png");
     glGenTextures(1, &iChannel_1);
     glBindTexture(GL_TEXTURE_2D, iChannel_1);
 
@@ -412,7 +412,7 @@ double * mouse = (double *) malloc(sizeof(double)*4);
         //Utilização de um segundo shader para calcular vizinhança
          BufferAprogram.use();
         BufferAprogram.setSampler("iChannel0",0);
-         //BufferAprogram.setSampler("iChannel1",1);
+        BufferAprogram.setSampler("iChannel1",1);
         BufferAprogram.setVec2("iResolution",resolution) ;
         BufferAprogram.setVec4("iMouse", mouse);
         BufferAprogram.setFloat("iTime",currentTime);
@@ -420,8 +420,8 @@ double * mouse = (double *) malloc(sizeof(double)*4);
         glBindVertexArray(VAO);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, imageTexture0);
-       //glActiveTexture(GL_TEXTURE1);
-        //glBindTexture(GL_TEXTURE_2D, iChannel_3);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, birdTexture);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT,0);
         //glBindVertexArray(0);
           //  glUseProgram(0);
