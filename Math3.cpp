@@ -294,7 +294,7 @@ int main()
     glBindFramebuffer(GL_FRAMEBUFFER,FBO_2);
 
     unsigned int iChannel_2;
-
+     unsigned int quatiTexture = loadTexture("../textures/ShaderToyTextures/quati.png");
     glGenTextures(1, &iChannel_2);
     glBindTexture(GL_TEXTURE_2D, iChannel_2);
 
@@ -413,6 +413,7 @@ double * mouse = (double *) malloc(sizeof(double)*4);
          BufferAprogram.use();
         BufferAprogram.setSampler("iChannel0",0);
         BufferAprogram.setSampler("iChannel1",1);
+        BufferAprogram.setSampler("iChannel2",2);
         BufferAprogram.setVec2("iResolution",resolution) ;
         BufferAprogram.setVec4("iMouse", mouse);
         BufferAprogram.setFloat("iTime",currentTime);
@@ -422,6 +423,8 @@ double * mouse = (double *) malloc(sizeof(double)*4);
         glBindTexture(GL_TEXTURE_2D, imageTexture0);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, birdTexture);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, quatiTexture);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT,0);
         //glBindVertexArray(0);
           //  glUseProgram(0);
