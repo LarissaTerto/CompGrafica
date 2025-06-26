@@ -6,6 +6,7 @@ uniform sampler2D iChannel0;
 uniform sampler2D iChannel1;
 uniform sampler2D iChannel2;
 uniform sampler2D iChannel3;
+uniform sampler2D iChannel4;
 uniform vec2 iResolution;
 uniform vec4 iMouse;
 uniform float iTime;
@@ -59,8 +60,8 @@ vec4 birdShadow(vec2 uv, vec2 offset, float xOffset, float yPos, float iTime) {
 }
 
 vec4 quati(vec2 uv, sampler2D animalTex, float xOffset, float baseY, float iTime) {
-    vec2 animalSize = vec2(0.38, 0.32);  // On-screen size of the animal
-    int frameCount = 2;                  // Two frames in the sprite sheet
+    vec2 animalSize = vec2(0.22, 0.22);  // On-screen size of the animal
+    int frameCount = 3;                  // Two frames in the sprite sheet
     float frameWidth = 1.0 / float(frameCount);
 
     // Calculate horizontal movement across the screen
@@ -77,13 +78,15 @@ vec4 quati(vec2 uv, sampler2D animalTex, float xOffset, float baseY, float iTime
         -(uv.y - animalPos.y) / animalSize.y + 0.5
     );
 
-    // Sync animation frame with hop phase
-    float legPhase = sin(t * 3.1415);         // Smooth wave: 0 -> 1 -> 0
-    float frameIndex = legPhase > 0.5 ? 1.0 : 0.0;
+    float frameRate = 6.0;
+    float frameIndex = mod(floor((iTime - xOffset) * frameRate), float(frameCount));
 
-    // Shift into the correct frame on the sprite sheet
+    // UV width and stride
+    float frameUVWidth = 168.0 / 500.0;
+    float frameStride   = 168.0 / 500.0;
+
     vec2 frameUV = vec2(
-        animalUV.x / float(frameCount) + frameIndex * frameWidth,
+        animalUV.x * frameUVWidth + frameIndex * frameStride,
         animalUV.y
     );
 
@@ -97,7 +100,7 @@ vec4 quati(vec2 uv, sampler2D animalTex, float xOffset, float baseY, float iTime
 
 vec4 birdBanner(vec2 uv, float iTime) {
     float bird1X = 1.2 - (iTime / 15.0);
-    float bird2X = 1.2 - ((iTime - 5.0) / 15.0);
+    float bird2X = 1.2 - ((iTime - 7.0) / 15.0);
     float bannerY = 0.17; // just below their bodies
 
     vec2 p1 = vec2(bird1X, bannerY);
@@ -110,16 +113,17 @@ vec4 birdBanner(vec2 uv, float iTime) {
     // Transform screen UV to banner UV
     vec2 bannerCenter = (p1 + p2) * 0.5;
     vec2 bannerUV = (uv - bannerCenter) / vec2(width, height) + 0.5;
+    vec2 correctedUV = vec2(bannerUV.x, 1.0 - bannerUV.y);
 
-    bool inside = all(greaterThanEqual(bannerUV, vec2(0.0))) &&
-                  all(lessThanEqual(bannerUV, vec2(1.0)));
+    bool inside = all(greaterThanEqual(correctedUV, vec2(0.0))) &&
+                  all(lessThanEqual(correctedUV, vec2(1.0)));
 
-    return inside ? texture(iChannel0, bannerUV) : vec4(0.0);
+    return inside ? texture(iChannel4, correctedUV) : vec4(0.0);
 }
 
 vec4 quatiBanner(vec2 uv, float iTime) {
-    float q1X = -0.2 + (iTime - 17.0) / 20.0;
-    float q2X = -0.2 + (iTime - 21.0) / 20.0;
+    float q1X = -0.2 + (iTime - 18.0) / 20.0;
+    float q2X = -0.2 + (iTime - 23.0) / 20.0;
 
     float t1 = mod(iTime - 15.0, 1.0);
     float t2 = mod(iTime - 20.0, 1.0);
@@ -135,11 +139,12 @@ vec4 quatiBanner(vec2 uv, float iTime) {
     vec2 bannerCenter = (p1 + p2) * 0.5;
 
     vec2 bannerUV = (uv - bannerCenter) / vec2(width, height) + 0.5;
+    vec2 correctedUV = vec2(bannerUV.x, 1.0 - bannerUV.y);
 
-    bool inside = all(greaterThanEqual(bannerUV, vec2(0.0))) &&
-                  all(lessThanEqual(bannerUV, vec2(1.0)));
+    bool inside = all(greaterThanEqual(correctedUV, vec2(0.0))) &&
+                  all(lessThanEqual(correctedUV, vec2(1.0)));
 
-    return inside ? texture(iChannel0, bannerUV) : vec4(0.0);
+    return inside ? texture(iChannel3, correctedUV) : vec4(0.0);
 }
 
 void main() {
@@ -149,11 +154,11 @@ void main() {
     vec4 background = texture(iChannel0, uv);
 
     vec4 shadow1 = birdShadow(uv, vec2(+0.02, +0.02), 0.0, 0.15, iTime);
-    vec4 shadow2 = birdShadow(uv, vec2(+0.02, +0.02), 5.0, 0.15, iTime);
+    vec4 shadow2 = birdShadow(uv, vec2(+0.02, +0.02), 6.6, 0.15, iTime);
 
     // Then draw birds over the shadows
     vec4 bird1 = flyingBird(uv, iChannel1, 0.0, 0.15, iTime);
-    vec4 bird2 = flyingBird(uv, iChannel1, 5.0, 0.15, iTime);
+    vec4 bird2 = flyingBird(uv, iChannel1, 6.6, 0.15, iTime);
 
     vec4 allBirds = bird1 + bird2;
     vec4 allShadows = shadow1 + shadow2;
@@ -163,7 +168,7 @@ void main() {
 
     if (iTime > 5.0) {
         quati1 = quati(uv, iChannel2, 15.0, 0.85, iTime);
-        quati2 = quati(uv, iChannel2, 23.0, 0.85, iTime);
+        quati2 = quati(uv, iChannel2, 25.0, 0.85, iTime);
     }
 
     vec4 birds = bird1 + bird2;
