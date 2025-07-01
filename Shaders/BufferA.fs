@@ -101,24 +101,33 @@ vec4 quati(vec2 uv, sampler2D animalTex, float xOffset, float baseY, float iTime
 vec4 birdBanner(vec2 uv, float iTime) {
     float bird1X = 1.2 - (iTime / 15.0);
     float bird2X = 1.2 - ((iTime - 7.0) / 15.0);
-    float bannerY = 0.17; // just below their bodies
+    float bannerY = 0.17;
 
     vec2 p1 = vec2(bird1X, bannerY);
     vec2 p2 = vec2(bird2X, bannerY);
 
-    // Define rectangular UV space between p1 and p2
     float width = 0.7 * abs(p2.x - p1.x);
     float height = 0.1;
 
-    // Transform screen UV to banner UV
     vec2 bannerCenter = (p1 + p2) * 0.5;
     vec2 bannerUV = (uv - bannerCenter) / vec2(width, height) + 0.5;
     vec2 correctedUV = vec2(bannerUV.x, 1.0 - bannerUV.y);
 
+    // Gentle horizontal waving, like a flag
+    float windFreq = 4.0;      // number of ripples across the width
+    float windSpeed = 0.5;     // how fast it moves
+    float windAmp = 0.015;     // how much it bends
+
+    // Offset vertically based on sine of Y + time (for horizontal movement)
+    float wave = sin((correctedUV.y + iTime * windSpeed) * windFreq) * windAmp;
+
+    // Apply distortion to the X axis (horizontal waving)
+    vec2 wavingUV = vec2(correctedUV.x + wave, correctedUV.y);
+
     bool inside = all(greaterThanEqual(correctedUV, vec2(0.0))) &&
                   all(lessThanEqual(correctedUV, vec2(1.0)));
 
-    return inside ? texture(iChannel4, correctedUV) : vec4(0.0);
+    return inside ? texture(iChannel4, wavingUV) : vec4(0.0);
 }
 
 vec4 quatiBanner(vec2 uv, float iTime) {
@@ -131,7 +140,7 @@ vec4 quatiBanner(vec2 uv, float iTime) {
     float hop1 = 0.02 * pow(sin(t1 * 3.1415), 2.0);
     float hop2 = 0.02 * pow(sin(t2 * 3.1415), 2.0);
 
-    vec2 p1 = vec2(q1X + 0.015, 0.08 + hop1 + 0.82); // top of jumper body
+    vec2 p1 = vec2(q1X + 0.015, 0.08 + hop1 + 0.82);
     vec2 p2 = vec2(q2X + 0.015, 0.08 + hop2 + 0.82);
 
     float width = abs(p2.x - p1.x);
@@ -141,14 +150,22 @@ vec4 quatiBanner(vec2 uv, float iTime) {
     vec2 bannerUV = (uv - bannerCenter) / vec2(width, height) + 0.5;
     vec2 correctedUV = vec2(bannerUV.x, 1.0 - bannerUV.y);
 
+    // 🌬️ Gentle horizontal waving
+    float windFreq = 5.0;
+    float windSpeed = 0.6;
+    float windAmp = 0.015;
+    float wave = sin((correctedUV.y + iTime * windSpeed) * windFreq) * windAmp;
+    vec2 wavingUV = vec2(correctedUV.x + wave, correctedUV.y);
+
     bool inside = all(greaterThanEqual(correctedUV, vec2(0.0))) &&
                   all(lessThanEqual(correctedUV, vec2(1.0)));
 
-    return inside ? texture(iChannel3, correctedUV) : vec4(0.0);
+    return inside ? texture(iChannel3, wavingUV) : vec4(0.0);
 }
 
 void main() {
     vec2 p = gl_FragCoord.xy / vec2(1024.0, 678.0);
+    
     vec2 uv = vec2(p.x, 1.0 - p.y);
 
     vec4 background = texture(iChannel0, uv);
