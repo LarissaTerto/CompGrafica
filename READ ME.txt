@@ -3,22 +3,6 @@ cmake ..
 make
 ./Math3
 
-Código: Shaders -> .frag e .vert
-
-
-image.fs.frag (base cod professor)
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-uniform float iTime;
-uniform vec4 iMouse;
-uniform vec2 iResolution;
-uniform int iFrame;
-out vec4 C;
-
-#define PI 3.1459
-
 /*  Install  Istructions
 
 sudo apt-get install g++ cmake git
