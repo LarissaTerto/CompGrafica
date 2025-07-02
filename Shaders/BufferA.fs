@@ -301,7 +301,7 @@ void main() {
     vec4 layered = shadows + birds + quatis+ bannerBird + bannerQuati;
    
     //Insere gradiente de luz ambiente, mais claro no céu e mais escuro embaixo
-    float ambient = mix(1.0, 0.7, uv.y); // bottom = 65%, top = 100%
+    float ambient = mix(1.0, 0.7, uv.y); // chão = 70%, céu = 100%
 
     //Aplica cores do canal RGB
     vec3 finalColor = mix(background.rgb, layered.rgb, clamp(layered.a, 0.0, 1.0));
